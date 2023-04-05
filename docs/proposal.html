@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CS:GODOT</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.co" />
+
+  	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FreeHTML5.co
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	-->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+	<div id="fh5co-page">
+		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+
+			<h1 id="fh5co-logo"><a href="index.html">CS:GODOT</a></h1>
+			<nav id="fh5co-main-menu" role="navigation">
+				<ul>
+					<li><a href="index.html">Overview</a></li>
+					<li class="fh5co-active"><a href="proposal.html">Proposal</a></li>
+					<li><a href="milestone.html">Milestone</a></li>
+					<li><a href="final.html">Final</a></li>
+				</ul>
+			</nav>
+
+			<div class="fh5co-footer">
+				<ul>
+					<li><a href="#"><i class="fa fa-github"></i></a></li>
+				</ul>
+			</div>
+
+		</aside>
+
+		<div id="fh5co-main">
+			<div class="fh5co-narrow-content">
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
+						<h2 class="fh5co-heading">Summary</h2>
+						<p><strong>Andrew Shen, Charles Liu, Lena Kushigemachi, Ryan Chan</strong></p>
+						<p>In this project, we will implement a first-person shooter game inspired by Counter-Strike, a popular FPS video game series. The focus of our project will be on interactive volumetric smoke grenades along with implementing functionality to make the game interactive and playable with real-world physics.</p>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
+						<h2 class="fh5co-heading">Problem Description</h2>
+						<p><strong>Problem:</strong></p>
+						<p>Our project will recreate the basic functionality of a popular first-person shooter (FPS) game, Counter-Strike. We want to specifically focus on creating realistic volumetric smoke grenades that will interact with the environment. This includes bullet tracers and environmental structures. This is inspired by the recent announcement of Counter-Strike 2 and its introduction of responsive smokes, dramatically changing gameplay from its predecessor, Counter-Strike Global Offensive. Counter-Strike has provided entertainment and enjoyment for millions of players and we want to figure out the specific mechanics that have contributed to its success. We want to create a playable game with player movement and shooting physics.</p>
+						<p><strong>Challenges:</strong></p>
+						<p>Creating a game from scratch is complex and involves a lot of different aspects that will need to work cohesively together, such as kinetics, cameras, lighting, and texturing. Combining the different aspects of the game together could produce unexpected bugs that only appear when run altogether, making it difficult to debug. In addition, creating interacive smokes that can respond to the environment will be challenging.</p>
+						<p><strong>Solution:</strong></p>
+						<p>Using Godot as a game engine, we will create an environment and implement player physics and collisions. We will also implement interactive smokes using volume fog based on volumetric lighting in a large 3-dimensional buffer, also known as froxel buffers. We will utilize kinematics to implement player movement and raycasts to implement bullet physics by following Godot documentation and tutorials. We will use keyframing to create animations.</p>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
+						<h2 class="fh5co-heading">Goals &amp; Deliverables</h2>
+						<p><strong>What we plan to deliver:</strong></p>
+						<ul>
+							<li>Interactive demo:
+								<ul>
+									<li>Player movement</li>
+									<li>Shooting and bullet physics</li>
+									<li>Interactive smoke grenades</li>
+								</ul>
+							</li>
+							<li>Videos of gameplay showing various aspects</li>
+							<li>Images of smokes and interaction with smokes</li>
+						</ul>
+						<p><strong>What we hope to deliver:</strong></p>
+						<p>We hope to deliver more features to extend our project past the basics. These include more maps/different environments, multiplayer, custom skins, and different types of weapons. We want to make CS:GODOT feel more complete as a game with replayability and variety.</p>
+						<p><strong>Measurements of the quality/performace of the system:</strong></p>
+						<p>Player movement should be semi-realistic. Smokes should work as intended and produce a volumetric fog effect with the ability to physically alter the shape of the smoke. Raycasting and bullet tracing should work as intended. Bullets should follow the expected trajectory of the aimed path. Player animations should be seamless with no artifacts. Overall performance should be smooth with no lagging. We can analyze the affect of our program on our personal computers.</p>
+						<p><strong>Subtasks:</strong></p>
+						<ul>
+							<li>Plan to achieve
+								<ul>
+									<li>Learn how to use Godot</li>
+									<li>Build a physical environment</li>
+									<li>Player movement</li>
+									<li>Interactive volumetric smokes</li>
+									<li>Bullet physics</li>
+									<li>Lighting</li>
+								</ul>
+							</li>
+							<li>Hope to achieve
+								<ul>
+									<li>Multiplayer</li>
+									<li>Implement different types of weapons</li>
+									<li>Implement custom skins</li>
+								</ul>
+						</ul>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
+						<h2 class="fh5co-heading">Schedule</h2>
+						<p><strong>Week 1:</strong></p>
+						<ul>
+							<li>Learn about different algorithms and techniques to model volumetric smoke in different environments</li>
+							<li>Learn how to use Godot in either the C++ variant or the GDScript variant</li>
+							<li>Set up project and figure out how to enable efficient cooperation</li>
+							<li>Determine what sort of resources we can use to find good assets for our world or how to use tools in order to create such resources</li>
+							<li>Begin coding basic player movement and collision detection</li>
+						</ul>
+						<p><strong>Week 2:</strong></p>
+						<ul>
+							<li>Begin coding volumetric smokes using aforementioned algorithms and techniques to model it properly</li>
+							<li>Begin coding smoke grenades physics</li>
+							<li>Begin coding weapon physics</li>
+							<li>Determine the resources/assets that we need for grenade models, gun models, etc.</li>
+							<li>Plan layout and aesthetic of the map as well as being to insert the correct assets into the game</li>
+						</ul>
+						<p><strong>Week 3:</strong></p>
+						<ul>
+							<li>Continue coding volumetric smoke based on techniques and algorithms as described above</li>
+							<li>Continue to work on expanding the map and focus on adding details that bring life to the scenes</li>
+						</ul>
+						<p><strong>Week 4:</strong></p>
+						<ul>
+							<li>Perform bug testing and examine edge cases to make sure that the code runs as expected</li>
+							<li>Put finishing touches on the map and improve the visual quality by adding lighting, wind, and shaders</li>
+							<li>Prepare presentation and deliverables</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
+						<h2 class="fh5co-heading">Resources</h2>
+						<p><strong>Online Resources:</strong></p>
+						<ul>
+							<li><a href="https://docs.godotengine.org/en/3.1/tutorials/3d/fps_tutorial/index.html" target="_blank">Godot FPS Tutorial</a></li>
+							<li><a href="https://godotengine.org/article/fog-volumes-arrive-in-godot-4/" target="_blank">Fog Volumes in Godot article</a></li>
+							<li><a href="https://advances.realtimerendering.com/s2014/wronski/bwronski_volumetric_fog_siggraph2014.pdf" target="_blank">Talk by Bartlomiej Wronski, “Volumetric Fog: Unified compute shader based solution to atmospheric scattering”</a></li>
+							<li><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html" target="_blank">Godot documentation</a></li>
+							<li><a href="https://ctwobosius.github.io/Deviant3D/" target="_blank">Deviant3D - past CS 184 project</a></li>
+							<li><a href="https://ray-pan.github.io/vr-touhou/final.html" target="_blank">Virtual Reality Bullet Hell - past CS 184 project</a></li>
+						</ul>
+						<p><strong>Hardware Resources:</strong></p>
+						<ul>
+							<li>Personal laptops</li>
+						</ul>
+						<p><strong>Software Resources:</strong></p>
+						<ul>
+							<li><a href="https://godotengine.org/" target="_blank">Godot</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	
+	
+	<!-- MAIN JS -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
