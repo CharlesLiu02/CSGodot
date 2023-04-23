@@ -1,0 +1,13 @@
+GPUParticles3D
+AnimationPlayer
+AnimationTree
+StaticBody3D
+RayCast3D
+MeshInstance3D
+CollisionShape3D
+TextureRect
+DirectionalLight3D
+WorldEnvironment
+Camera3D
+CharacterBody3D
+CharacterBody2D
