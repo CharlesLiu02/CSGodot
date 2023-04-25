@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://jvxt6m88ttv6" path="res://textures/crosshair1.png" id="2_ps5ft"]
 [ext_resource type="PackedScene" uid="uid://bcp0onysiaheb" path="res://weapon.tscn" id="4_ntpf4"]
 [ext_resource type="Texture2D" uid="uid://csu7jul7l2025" path="res://addons/kenney_particle_pack/star_06.png" id="4_q2n18"]
+[ext_resource type="PackedScene" uid="uid://nik36u375a0f" path="res://t_model.tscn" id="5_g64lr"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nnhe1"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vhihu"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_552fk"]
+size = Vector3(0.780184, 2.15081, 0.810028)
 
 [sub_resource type="Gradient" id="Gradient_t2xwk"]
 offsets = PackedFloat32Array(0, 0.207547, 1)
@@ -43,12 +43,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_sjw7c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_nnhe1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_vhihu")
-skeleton = NodePath("../CollisionShape3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699168, -0.194684, 0.0537901)
+shape = SubResource("BoxShape3D_552fk")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65341, -0.0998571)
@@ -71,9 +67,24 @@ target_position = Vector3(0, 0, -200)
 
 [node name="weapon" parent="Camera3D" instance=ExtResource("4_ntpf4")]
 transform = Transform3D(0.956305, 0, -0.292372, 0, 1, 0, 0.292372, 0, 0.956305, 0.05, -0.05, 0.12)
+visible = false
 
 [node name="MuzzleFlash" type="GPUParticles3D" parent="Camera3D/weapon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0811341, -0.0648357, -0.793079)
+emitting = false
+amount = 1
+lifetime = 0.01
+one_shot = true
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_qy3ds")
+draw_pass_1 = SubResource("QuadMesh_jum73")
+
+[node name="t_model" parent="Camera3D" instance=ExtResource("5_g64lr")]
+transform = Transform3D(-0.029673, 0, 0.00441719, 0, 0.03, 0, -0.00441719, 0, -0.029673, 0.0699093, -1.92829, 0.299709)
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="Camera3D/t_model"]
+transform = Transform3D(-32.97, 0, -4.908, 0, 33.3333, 0, 4.908, 0, -32.97, -4.04866, 61.5353, 42.0283)
 emitting = false
 amount = 1
 lifetime = 0.01

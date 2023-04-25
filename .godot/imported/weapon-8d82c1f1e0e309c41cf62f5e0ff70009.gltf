@@ -33,28 +33,40 @@
 				"vs":{
 					"export_list":[
 						{
-							"name":"reload.dmx",
+							"name":"Collection 1.dmx",
+							"collection":{
+								"name":"Collection 1",
+								"type":"Collection"
+							},
+							"ob_type":"COLLECTION",
+							"icon":"GROUP"
+						},
+						{
+							"name":"Collection 2.dmx",
+							"collection":{
+								"name":"Collection 2",
+								"type":"Collection"
+							},
+							"ob_type":"COLLECTION",
+							"icon":"GROUP"
+						},
+						{
+							"name":"Collection 20.dmx",
+							"collection":{
+								"name":"Collection 20",
+								"type":"Collection"
+							},
+							"ob_type":"COLLECTION",
+							"icon":"GROUP"
+						},
+						{
+							"name":"fire.dmx",
 							"ob_type":"ACTION",
 							"icon":"ACTION",
-							"item_name":"armature"
-						},
-						{
-							"name":"arms.dmx",
-							"ob_type":"OBJECT",
-							"icon":"OUTLINER_OB_MESH",
-							"item_name":"arms"
-						},
-						{
-							"name":"bone_shape_circle.dmx",
-							"ob_type":"OBJECT",
-							"icon":"OUTLINER_OB_MESH",
-							"item_name":"bone_shape_circle"
-						},
-						{
-							"name":"Plane.dmx",
-							"ob_type":"OBJECT",
-							"icon":"OUTLINER_OB_MESH",
-							"item_name":"Plane"
+							"obj":{
+								"name":"armature",
+								"type":"Object"
+							}
 						}
 					]
 				},

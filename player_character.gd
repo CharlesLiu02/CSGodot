@@ -10,12 +10,12 @@ var gravity = 25
 var curr_velocity = 0
 var curr_velocity_y = 0
 @onready var camera:Camera3D = $Camera3D
-@onready var muzzle_flash = $Camera3D/weapon/MuzzleFlash
+@onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
 
 # Weapon Parameters
 var ak_damage = 33
 #@onready var player = $AnimationPlayer
-@onready var weapon = $Camera3D/weapon/AnimationPlayer
+@onready var weapon = $Camera3D/t_model/AnimationPlayer
 @onready var raycast = $Camera3D/RayCast3D
 
 # Movement functions
@@ -60,7 +60,7 @@ func _input(event):
 # Weapon Fire functions
 func fire():
 	if Input.is_action_pressed("fire"):
-		weapon.play("fire")
+		#weapon.play("fire")
 		muzzle_flash.restart()
 		muzzle_flash.emitting = true
 	else:
@@ -68,4 +68,4 @@ func fire():
 		
 func reload():
 	if Input.is_action_pressed("reload"):
-		weapon.play("reload")
+		weapon.play("rifle_reload001")
