@@ -4,3 +4,5 @@ res://environment.tscn
 res://weapon.tscn
 res://t_model.tscn
 res://player_character.gd
+res://world.gd
+res://t_player.tscn
