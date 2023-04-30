@@ -7,14 +7,18 @@ signal health_changed(health_value)
 @export var speed = 6
 @export var acceleration = 15
 @export var jump_velocity = 8
+@export var smoke_grenade = preload("res://smoke_grenade.tscn")
+@export var frag_grenade = preload("res://frag_grenade.tscn")
 var look_sensitivity = 0.0005
 var gravity = 25
 var curr_velocity = 0
 var curr_velocity_y = 0
 var is_dead = false
 var is_reloading = false
-@onready var camera:Camera3D = $Camera3D
+@onready var camera = $Camera3D
 @onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
+@onready var grenade_toss_pos = $GrenadeTossPos
+@onready var selected_grenade = smoke_grenade
 
 var health = 100
 
@@ -40,7 +44,7 @@ func _physics_process(delta):
 		direction -= transform.basis.x
 	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x
-	
+
 	direction = direction.normalized()
 	curr_velocity = velocity.lerp(direction * speed, acceleration * delta)
 	
@@ -63,10 +67,22 @@ func _input(event):
 	if is_dead or not is_multiplayer_authority():
 		return
 	check_animation()
+	
+	if event.is_action_pressed("throw_grenade"):
+		throw_grenade()
+		
+	if event.is_action_pressed("item_1"):
+		selected_grenade = smoke_grenade
+		
+	if event.is_action_pressed("item_2"):
+		selected_grenade = frag_grenade
+	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * look_sensitivity)
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+		grenade_toss_pos.rotate_x(-event.relative.y * look_sensitivity)
+		grenade_toss_pos.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
 func check_animation():
 	muzzle_flash.emitting = false
@@ -90,6 +106,13 @@ func fire():
 		# Make other player take damage
 		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
 		
+func throw_grenade():
+	var grenade = selected_grenade.instantiate()
+	
+	get_tree().root.add_child(grenade)
+	grenade.global_transform = grenade_toss_pos.global_transform
+	grenade.apply_impulse(-grenade.global_transform.basis.z * 8.0)
+
 func reload():
 	animation_player.play("rifle_reload001")
 	
@@ -108,7 +131,6 @@ func _on_finished(animation):
 		animation_player.play("rifle_reload001")
 		animation_player.stop()
 		health_changed.emit(health)
-		
 	
 func _ready():
 	if not is_multiplayer_authority():

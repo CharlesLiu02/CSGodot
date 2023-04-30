@@ -74,6 +74,7 @@ placeholder_text = "Enter Address to Join Here"
 alignment = 1
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -105,7 +106,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "100"
+text = "Health: 100"
 vertical_alignment = 2
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]

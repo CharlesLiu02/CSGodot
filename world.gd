@@ -46,7 +46,7 @@ func add_t_player(peer_id):
 		t_player.health_changed.connect(update_health)
 	
 func update_health(health_value):
-	health.text = str(health_value)
+	health.text = "Health: " + str(health_value)
 
 func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
