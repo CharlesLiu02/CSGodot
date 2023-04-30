@@ -1,3 +1,6 @@
+MultiplayerSynchronizer
+MultiplayerSpawner
+Node
 Camera3D
 Node3D
 RemoteTransform3D
@@ -7,9 +10,7 @@ RigidBody3D
 Label
 RichTextLabel
 Control
-MultiplayerSynchronizer
 AnimationPlayer
-MultiplayerSpawner
 LineEdit
 Button
 VBoxContainer
@@ -29,4 +30,3 @@ RayCast3D
 TextureRect
 DirectionalLight3D
 WorldEnvironment
-CharacterBody2D

@@ -4,6 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://4wq6kplurgja" path="res://t_model.tscn" id="2_lb0sb"]
 [ext_resource type="Texture2D" uid="uid://csu7jul7l2025" path="res://addons/kenney_particle_pack/star_06.png" id="3_uoh5u"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aypfv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Camera3D/t_model/MuzzleFlash:emitting")
+properties/2/spawn = true
+properties/2/sync = true
+
 [sub_resource type="Gradient" id="Gradient_t2xwk"]
 offsets = PackedFloat32Array(0, 0.207547, 1)
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
@@ -36,21 +47,14 @@ size = Vector2(0.5, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_552fk"]
 size = Vector3(0.78, 2.192, 0.81)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aypfv"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/sync = true
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/sync = true
-properties/2/path = NodePath("Camera3D/t_model/MuzzleFlash:emitting")
-properties/2/spawn = true
-properties/2/sync = true
-
 [node name="t_player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92325, 0)
 collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_0srre")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_aypfv")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.6077e-08)
@@ -79,6 +83,3 @@ transform = Transform3D(1, 0, 0, 0, 0.915663, -0.401948, 0, 0.401948, 0.915662, 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699168, -0.828719, 0.0537901)
 shape = SubResource("BoxShape3D_552fk")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_aypfv")

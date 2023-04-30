@@ -17,7 +17,7 @@ sky = SubResource("Sky_03k8g")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="World" type="Node"]
+[node name="world" type="Node"]
 script = ExtResource("1_6rq4i")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -110,7 +110,7 @@ text = "Health: 100"
 vertical_alignment = 2
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://t_player.tscn")
+_spawnable_scenes = PackedStringArray("res://t_player.tscn", "res://frag_grenade.tscn", "res://smoke_grenade.tscn")
 spawn_path = NodePath("..")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]

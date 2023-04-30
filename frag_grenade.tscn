@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn2ovj5mtktaa"]
+[gd_scene load_steps=5 format=3 uid="uid://dn2ovj5mtktaa"]
 
 [ext_resource type="PackedScene" uid="uid://vd70ajhn40gj" path="res://models/grenades/frag_grenade.glb" id="1_0hpx6"]
 [ext_resource type="Script" path="res://grenade.gd" id="1_5a32y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_decd5"]
 radius = 0.149527
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kkmdx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="FragGrenade" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000410721, -7.45058e-09, 2.94447e-05)
@@ -23,3 +31,6 @@ shape = SubResource("SphereShape3D_decd5")
 wait_time = 4.0
 one_shot = true
 autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kkmdx")

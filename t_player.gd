@@ -7,8 +7,6 @@ signal health_changed(health_value)
 @export var speed = 6
 @export var acceleration = 15
 @export var jump_velocity = 8
-@export var smoke_grenade = preload("res://smoke_grenade.tscn")
-@export var frag_grenade = preload("res://frag_grenade.tscn")
 var look_sensitivity = 0.0005
 var gravity = 25
 var curr_velocity = 0
@@ -18,7 +16,7 @@ var is_reloading = false
 @onready var camera = $Camera3D
 @onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
 @onready var grenade_toss_pos = $GrenadeTossPos
-@onready var selected_grenade = smoke_grenade
+@onready var selected_grenade = "smoke"
 
 var health = 100
 
@@ -72,10 +70,10 @@ func _input(event):
 		throw_grenade()
 		
 	if event.is_action_pressed("item_1"):
-		selected_grenade = smoke_grenade
+		selected_grenade = "smoke"
 		
 	if event.is_action_pressed("item_2"):
-		selected_grenade = frag_grenade
+		selected_grenade = "frag"
 	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * look_sensitivity)
@@ -108,11 +106,13 @@ func fire():
 		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
 		
 func throw_grenade():
-	var grenade = selected_grenade.instantiate()
-	
-	get_tree().root.add_child(grenade)
-	grenade.global_transform = grenade_toss_pos.global_transform
-	grenade.apply_impulse(-grenade.global_transform.basis.z * 8.0)
+#	var grenade = selected_grenade.instantiate()
+#
+	var world_scene = get_node('/root/world')
+#	world_scene.add_child(grenade, true)
+#	grenade.global_transform = grenade_toss_pos.global_transform
+#	grenade.apply_impulse(-grenade.global_transform.basis.z * 8.0)
+	world_scene.rpc("throw_grenade", selected_grenade, grenade_toss_pos.global_transform)
 
 func reload():
 	animation_player.play("rifle_reload001")
@@ -127,7 +127,7 @@ func _on_finished(animation):
 	if animation == "deathpose_lowviolence":
 		health = 100
 		is_dead = false
-		position = Vector3(0, 1, 0)
+		position = Vector3(0, 2, 0)
 		# Reset animation to default
 		animation_player.play("rifle_reload001")
 		animation_player.stop()
@@ -146,5 +146,3 @@ func receive_damage():
 		health = 0
 		death()
 	health_changed.emit(health)
-	
-	

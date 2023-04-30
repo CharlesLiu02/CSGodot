@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxnod5ied2tpb"]
+[gd_scene load_steps=5 format=3 uid="uid://bxnod5ied2tpb"]
 
 [ext_resource type="Script" path="res://grenade.gd" id="1_c8krn"]
 [ext_resource type="PackedScene" uid="uid://mdnl0p575u5o" path="res://models/grenades/smoke_grenade.glb" id="1_tq2xg"]
@@ -6,6 +6,14 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jav1c"]
 height = 0.238265
 radius = 0.0614907
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pw0e2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="SmokeGrenade" type="RigidBody3D"]
 collision_layer = 4
@@ -23,3 +31,6 @@ shape = SubResource("CylinderShape3D_jav1c")
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pw0e2")
