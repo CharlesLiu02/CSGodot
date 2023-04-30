@@ -1,8 +1,6 @@
-res://player_character.tscn
+res://t_player.tscn
 res://world.tscn
 res://environment.tscn
-res://weapon.tscn
 res://t_model.tscn
-res://player_character.gd
-res://world.gd
-res://t_player.tscn
+res://frag_grenade.tscn
+res://smoke_grenade.tscn

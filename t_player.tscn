@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cv1204xqpcy84"]
+[gd_scene load_steps=12 format=3 uid="uid://cv1204xqpcy84"]
 
-[ext_resource type="Script" path="res://player_character.gd" id="1_7rue2"]
+[ext_resource type="Script" path="res://t_player.gd" id="1_0srre"]
 [ext_resource type="PackedScene" uid="uid://4wq6kplurgja" path="res://t_model.tscn" id="2_lb0sb"]
 [ext_resource type="Texture2D" uid="uid://csu7jul7l2025" path="res://addons/kenney_particle_pack/star_06.png" id="3_uoh5u"]
 [ext_resource type="Texture2D" uid="uid://jvxt6m88ttv6" path="res://textures/crosshair1.png" id="4_mcq4g"]
-[ext_resource type="PackedScene" uid="uid://bcp0onysiaheb" path="res://weapon.tscn" id="5_c2i27"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_552fk"]
 size = Vector3(0.78, 2.192, 0.81)
@@ -52,7 +51,7 @@ properties/2/sync = true
 [node name="t_player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 3
-script = ExtResource("1_7rue2")
+script = ExtResource("1_0srre")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699168, -0.169425, 0.0537901)
@@ -79,21 +78,6 @@ draw_pass_1 = SubResource("QuadMesh_jum73")
 target_position = Vector3(0, 0, -200)
 collision_mask = 2
 
-[node name="weapon" parent="Camera3D" instance=ExtResource("5_c2i27")]
-transform = Transform3D(0.956305, 0, -0.292372, 0, 1, 0, 0.292372, 0, 0.956305, 0.05, -0.05, 0.12)
-visible = false
-
-[node name="MuzzleFlash" type="GPUParticles3D" parent="Camera3D/weapon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0811341, -0.0648357, -0.793079)
-emitting = false
-amount = 1
-lifetime = 0.01
-one_shot = true
-randomness = 1.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_qy3ds")
-draw_pass_1 = SubResource("QuadMesh_jum73")
-
 [node name="TextureRect" type="TextureRect" parent="Camera3D"]
 visible = false
 anchors_preset = 8
@@ -107,6 +91,17 @@ offset_right = 60.0
 offset_bottom = 60.0
 texture = ExtResource("4_mcq4g")
 expand_mode = 1
+
+[node name="Camera3D@weapon@MuzzleFlash" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0811341, -0.0648357, -0.793079)
+emitting = false
+amount = 1
+lifetime = 0.01
+one_shot = true
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_qy3ds")
+draw_pass_1 = SubResource("QuadMesh_jum73")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_aypfv")
