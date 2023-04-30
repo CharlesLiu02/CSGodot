@@ -42,6 +42,7 @@ func _on_join_button_pressed():
 
 func add_t_player(peer_id):
 	var t_player = T_player.instantiate()
+	t_player.global_position = Vector3(5, 2, 0)
 	t_player.name = str(peer_id)
 	# Add to scene tree
 	add_child(t_player)

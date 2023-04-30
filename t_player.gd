@@ -13,6 +13,8 @@ var curr_velocity = 0
 var curr_velocity_y = 0
 var is_dead = false
 var is_reloading = false
+var total_frames = 0
+var frames_between_shots = 3
 @onready var camera = $Camera3D
 @onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
 @onready var grenade_toss_pos = $GrenadeTossPos
@@ -23,6 +25,7 @@ var health = 100
 # Weapon Parameters
 @onready var animation_player = $Camera3D/t_model/AnimationPlayer
 @onready var raycast = $Camera3D/RayCast3D
+@onready var audio_player = $AudioStreamPlayer3D
 
 func _enter_tree():
 	# Make sure each client controls their own player
@@ -65,6 +68,7 @@ func _input(event):
 	if is_dead or not is_multiplayer_authority():
 		return
 	check_animation()
+	total_frames += 1
 	
 	if event.is_action_pressed("throw_grenade"):
 		throw_grenade()
@@ -104,14 +108,9 @@ func fire():
 		var hit_player = raycast.get_collider()
 		# Make other player take damage
 		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
-		
+
 func throw_grenade():
-#	var grenade = selected_grenade.instantiate()
-#
 	var world_scene = get_node('/root/world')
-#	world_scene.add_child(grenade, true)
-#	grenade.global_transform = grenade_toss_pos.global_transform
-#	grenade.apply_impulse(-grenade.global_transform.basis.z * 8.0)
 	world_scene.rpc("throw_grenade", selected_grenade, grenade_toss_pos.global_transform)
 
 func reload():

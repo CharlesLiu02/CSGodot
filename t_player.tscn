@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv1204xqpcy84"]
+[gd_scene load_steps=12 format=3 uid="uid://cv1204xqpcy84"]
 
 [ext_resource type="Script" path="res://t_player.gd" id="1_0srre"]
 [ext_resource type="PackedScene" uid="uid://4wq6kplurgja" path="res://t_model.tscn" id="2_lb0sb"]
 [ext_resource type="Texture2D" uid="uid://csu7jul7l2025" path="res://addons/kenney_particle_pack/star_06.png" id="3_uoh5u"]
+[ext_resource type="AudioStream" uid="uid://bgm5o0t7fd8mn" path="res://sounds/ak47/ak47-1.wav" id="4_fmj4d"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aypfv"]
 properties/0/path = NodePath(".:position")
@@ -83,3 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 0.915663, -0.401948, 0, 0.401948, 0.915662, 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699168, -0.828719, 0.0537901)
 shape = SubResource("BoxShape3D_552fk")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_fmj4d")
+max_db = -2.0
