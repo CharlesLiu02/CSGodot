@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://v27phiy3pc4r"]
+
+[ext_resource type="PackedScene" uid="uid://dq28cnsm666q0" path="res://models/grenades/frag_grenade.blend" id="1_x1ddc"]
+
+[node name="frag_grenade" instance=ExtResource("1_x1ddc")]

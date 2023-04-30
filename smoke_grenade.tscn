@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3lrfcqut1fn8"]
+
+[ext_resource type="PackedScene" uid="uid://c0wxsbh5vr50n" path="res://models/grenades/smoke_grenade.blend" id="1_pv11c"]
+
+[node name="smoke_grenade" instance=ExtResource("1_pv11c")]
