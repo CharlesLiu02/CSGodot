@@ -81,6 +81,7 @@ func _input(event):
 		rotate_y(-event.relative.x * look_sensitivity)
 		camera.rotate_x(-event.relative.y * look_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+		# Make sure grenade toss position changes with camera
 		grenade_toss_pos.rotate_x(-event.relative.y * look_sensitivity)
 		grenade_toss_pos.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
