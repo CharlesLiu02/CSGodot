@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw41v50q141my"]
+[gd_scene load_steps=4 format=3 uid="uid://klljovut15vd"]
 
 [ext_resource type="Script" path="res://smoke/smoke.gd" id="1_2j5ha"]
 [ext_resource type="Shader" path="res://smoke.gdshader" id="1_s0bm1"]
@@ -12,7 +12,8 @@ shader_parameter/height_falloff = 0.5
 shader_parameter/edge_fade = 0.5
 
 [node name="SmokeVolume" type="FogVolume"]
-size = Vector3(10, 10, 10)
+size = Vector3(2, 2, 5)
 shape = 0
 material = SubResource("ShaderMaterial_0e5yy")
 script = ExtResource("1_2j5ha")
+sustain_time = 8.0

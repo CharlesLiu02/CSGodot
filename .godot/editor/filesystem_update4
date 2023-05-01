@@ -6,3 +6,8 @@ res://environment.tscn
 res://smoke/smoke.gdshader
 res://smoke/smoke.gd
 res://t_player.tscn
+res://VolumeFogGenerator.gd
+res://smoke/square_smoke_volume.tscn
+res://smoke/square_smoke_volume.gdshader
+res://smoke/VolumeFogGenerator.gd
+res://smoke.gdshader

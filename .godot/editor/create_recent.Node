@@ -1,3 +1,7 @@
+CollisionShape3D
+Area3D
+StaticBody3D
+MeshInstance3D
 FogVolume
 WorldEnvironment
 Label
@@ -10,7 +14,6 @@ MultiplayerSpawner
 Node
 RemoteTransform3D
 Timer
-CollisionShape3D
 RigidBody3D
 RichTextLabel
 Control
@@ -22,11 +25,8 @@ MarginContainer
 PanelContainer
 CanvasLayer
 CharacterBody3D
-Area3D
-MeshInstance3D
 BoneAttachment3D
 PhysicalBone3D
 Skeleton3D
 GPUParticles3D
 AnimationTree
-StaticBody3D
