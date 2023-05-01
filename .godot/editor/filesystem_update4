@@ -1,2 +1,5 @@
-res://environment.tscn
 res://t_player.tscn
+res://frag_grenade.tscn
+res://smoke_grenade.tscn
+res://world.tscn
+res://environment.tscn

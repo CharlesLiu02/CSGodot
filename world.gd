@@ -3,7 +3,8 @@ extends Node
 @onready var main_menu = $CanvasLayer/MainMenu
 @onready var address_entry = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry
 @onready var hud = $CanvasLayer/HUD
-@onready var health = $CanvasLayer/HUD/Label
+@onready var health_label = $CanvasLayer/HUD/HealthLabel
+@onready var lives_label = $CanvasLayer/HUD/LivesLabel
 
 const T_player = preload("res://t_player.tscn")
 const smoke_grenade = preload("res://smoke_grenade.tscn")
@@ -42,15 +43,21 @@ func _on_join_button_pressed():
 
 func add_t_player(peer_id):
 	var t_player = T_player.instantiate()
-	t_player.global_position = Vector3(5, 2, 0)
 	t_player.name = str(peer_id)
 	# Add to scene tree
 	add_child(t_player)
 	if t_player.is_multiplayer_authority():
 		t_player.health_changed.connect(update_health)
+		t_player.lives_decreased.connect(update_lives)
 	
 func update_health(health_value):
-	health.text = "Health: " + str(health_value)
+	health_label.text = "Health: " + str(health_value)
+	
+func update_lives(lives):
+	if lives <= 0:
+		lives_label.text = "YOU ARE DEAD"
+	else:
+		lives_label.text = "Lives: " + str(lives)
 
 func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
@@ -74,6 +81,7 @@ func throw_grenade(selected_grenade, grenade_toss_pos_transform):
 func _on_multiplayer_spawner_spawned(node):
 	if node.is_multiplayer_authority():
 		node.health_changed.connect(update_health)
+		node.lives_decreased.connect(update_lives)
 
 # Play online
 func upnp_setup():

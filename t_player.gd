@@ -2,34 +2,39 @@
 extends CharacterBody3D
 
 signal health_changed(health_value)
+signal lives_decreased(lives)
 
 # Movement Parameters
 @export var speed = 6
 @export var acceleration = 15
 @export var jump_velocity = 8
+var spawn_positions = [Vector3(0, 2.5, -9), Vector3(0, 2.5, 11), Vector3(13, 2.6, 12), Vector3(-12, 2.6, 12), Vector3(-12, 2.6, 0), Vector3(12, 4, 0), Vector3(12, 4,-25), Vector3(-12, 4,25), Vector3(12, 4,25), Vector3(25, 4, 12), Vector3(25, 4, -12), Vector3(-25, 4, -12), Vector3(-25, 4, 12)]
 var look_sensitivity = 0.0005
 var gravity = 25
 var curr_velocity = 0
 var curr_velocity_y = 0
 var is_dead = false
 var is_reloading = false
-var total_frames = 0
-var frames_between_shots = 3
 @onready var camera = $Camera3D
 @onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
 @onready var grenade_toss_pos = $GrenadeTossPos
 @onready var selected_grenade = "smoke"
 
 var health = 100
+@export var lives = 5
 
 # Weapon Parameters
 @onready var animation_player = $Camera3D/t_model/AnimationPlayer
-@onready var raycast = $Camera3D/RayCast3D
+@onready var raycast = $GrenadeTossPos/RayCast3D
 @onready var audio_player = $AudioStreamPlayer3D
+
+var camera_anglev = 0
 
 func _enter_tree():
 	# Make sure each client controls their own player
 	set_multiplayer_authority(str(name).to_int())
+	var rng = RandomNumberGenerator.new()
+	position = spawn_positions[rng.randi_range(0, 12)]
 
 # Movement functions
 func _physics_process(delta):
@@ -68,7 +73,6 @@ func _input(event):
 	if is_dead or not is_multiplayer_authority():
 		return
 	check_animation()
-	total_frames += 1
 	
 	if event.is_action_pressed("throw_grenade"):
 		throw_grenade()
@@ -105,9 +109,11 @@ func fire():
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
 	if raycast.is_colliding():
-		var hit_player = raycast.get_collider()
+		var hit_object = raycast.get_collider()
+		# Check if collision object is another player
+		if hit_object.has_method("receive_damage"):
 		# Make other player take damage
-		hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+			hit_object.receive_damage.rpc_id(hit_object.get_multiplayer_authority())
 
 func throw_grenade():
 	var world_scene = get_node('/root/world')
@@ -119,18 +125,25 @@ func reload():
 func death():
 	is_dead = true
 	animation_player.play("deathpose_lowviolence")
+	lives -= 1
+	lives_decreased.emit(lives)
 	
 func _on_finished(animation):
 	if animation == "rifle_reload001":
 		is_reloading = false
 	if animation == "deathpose_lowviolence":
-		health = 100
-		is_dead = false
-		position = Vector3(0, 2, 0)
-		# Reset animation to default
-		animation_player.play("rifle_reload001")
-		animation_player.stop()
-		health_changed.emit(health)
+		if lives > 0:
+			health = 100
+			is_dead = false
+			var rng = RandomNumberGenerator.new()
+			position = spawn_positions[rng.randi_range(0, 12)]
+			# Reset animation to default
+			animation_player.play("rifle_reload001")
+			animation_player.stop()
+			health_changed.emit(health)
+		else:
+			hide()
+			get_node("CollisionShape3D").set_disabled(true)
 	
 func _ready():
 	if not is_multiplayer_authority():
