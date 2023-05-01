@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxnod5ied2tpb"]
+[gd_scene load_steps=5 format=3 uid="uid://wwnllwmkm0dr"]
 
 [ext_resource type="Script" path="res://grenade.gd" id="1_c8krn"]
 [ext_resource type="PackedScene" uid="uid://mdnl0p575u5o" path="res://models/grenades/smoke_grenade.glb" id="1_tq2xg"]
@@ -28,9 +28,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00329512, -0.00495328, 0.0
 shape = SubResource("CylinderShape3D_jav1c")
 
 [node name="ExplodeTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 autostart = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_pw0e2")
+
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

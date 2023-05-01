@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://44wnqajre5wx"
-path.s3tc="res://.godot/imported/t_model_glove_fullfinger_exp.png-ec8efa84b2d4348d1e47f14db33785f2.s3tc.ctex"
+path.etc2="res://.godot/imported/t_model_glove_fullfinger_exp.png-ec8efa84b2d4348d1e47f14db33785f2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/characters/t_model_glove_fullfinger_exp.png"
-dest_files=["res://.godot/imported/t_model_glove_fullfinger_exp.png-ec8efa84b2d4348d1e47f14db33785f2.s3tc.ctex"]
+dest_files=["res://.godot/imported/t_model_glove_fullfinger_exp.png-ec8efa84b2d4348d1e47f14db33785f2.etc2.ctex"]
 
 [params]
 

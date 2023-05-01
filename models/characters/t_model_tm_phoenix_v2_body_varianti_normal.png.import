@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7kwuurciv3t7"
-path.s3tc="res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_normal.png-0d6ddd9366c6fbbe3544a7213cd5965a.s3tc.ctex"
+path.etc2="res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_normal.png-0d6ddd9366c6fbbe3544a7213cd5965a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/characters/t_model_tm_phoenix_v2_body_varianti_normal.png"
-dest_files=["res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_normal.png-0d6ddd9366c6fbbe3544a7213cd5965a.s3tc.ctex"]
+dest_files=["res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_normal.png-0d6ddd9366c6fbbe3544a7213cd5965a.etc2.ctex"]
 
 [params]
 

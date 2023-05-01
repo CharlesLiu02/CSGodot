@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5jlabmesrdet"
-path.s3tc="res://.godot/imported/t_model_ak47_exponent.png-dea05383ae457889754ccb0e333c56a4.s3tc.ctex"
+path.etc2="res://.godot/imported/t_model_ak47_exponent.png-dea05383ae457889754ccb0e333c56a4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/characters/t_model_ak47_exponent.png"
-dest_files=["res://.godot/imported/t_model_ak47_exponent.png-dea05383ae457889754ccb0e333c56a4.s3tc.ctex"]
+dest_files=["res://.godot/imported/t_model_ak47_exponent.png-dea05383ae457889754ccb0e333c56a4.etc2.ctex"]
 
 [params]
 

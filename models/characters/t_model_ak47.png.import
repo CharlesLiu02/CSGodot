@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6gev22w1mw68"
-path.s3tc="res://.godot/imported/t_model_ak47.png-5c3a13053560d24d434812dbfeeb38e2.s3tc.ctex"
+path.etc2="res://.godot/imported/t_model_ak47.png-5c3a13053560d24d434812dbfeeb38e2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/characters/t_model_ak47.png"
-dest_files=["res://.godot/imported/t_model_ak47.png-5c3a13053560d24d434812dbfeeb38e2.s3tc.ctex"]
+dest_files=["res://.godot/imported/t_model_ak47.png-5c3a13053560d24d434812dbfeeb38e2.etc2.ctex"]
 
 [params]
 

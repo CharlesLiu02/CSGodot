@@ -1,5 +1,8 @@
-res://t_player.tscn
-res://frag_grenade.tscn
-res://smoke_grenade.tscn
+res://smoke/smoke_volume.tscn
+res://grenade.gd
 res://world.tscn
+res://smoke_grenade.tscn
 res://environment.tscn
+res://smoke/smoke.gdshader
+res://smoke/smoke.gd
+res://t_player.tscn

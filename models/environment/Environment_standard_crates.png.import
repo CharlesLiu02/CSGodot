@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b828b2ys8y7mh"
-path.s3tc="res://.godot/imported/Environment_standard_crates.png-8543905b342ff2fa3f02ce7bac2e2a44.s3tc.ctex"
+path.etc2="res://.godot/imported/Environment_standard_crates.png-8543905b342ff2fa3f02ce7bac2e2a44.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_standard_crates.png"
-dest_files=["res://.godot/imported/Environment_standard_crates.png-8543905b342ff2fa3f02ce7bac2e2a44.s3tc.ctex"]
+dest_files=["res://.godot/imported/Environment_standard_crates.png-8543905b342ff2fa3f02ce7bac2e2a44.etc2.ctex"]
 
 [params]
 

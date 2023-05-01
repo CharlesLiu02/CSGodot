@@ -1,3 +1,5 @@
+FogVolume
+WorldEnvironment
 Label
 TextureRect
 Camera3D
@@ -28,5 +30,3 @@ Skeleton3D
 GPUParticles3D
 AnimationTree
 StaticBody3D
-RayCast3D
-DirectionalLight3D
