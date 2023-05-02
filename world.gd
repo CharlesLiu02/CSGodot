@@ -76,7 +76,7 @@ func throw_grenade(selected_grenade, grenade_toss_pos_transform):
 	
 	add_child(grenade, true)
 	grenade.global_transform = grenade_toss_pos_transform
-	grenade.apply_impulse(-grenade.global_transform.basis.z * 8.0)
+	grenade.apply_impulse(-grenade.global_transform.basis.z * 16.0)
 
 func _on_multiplayer_spawner_spawned(node):
 	if node.is_multiplayer_authority():

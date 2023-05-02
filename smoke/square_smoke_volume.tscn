@@ -17,6 +17,7 @@ shader_parameter/edge_fade = 0.1
 script = ExtResource("1_ayhxg")
 
 [node name="FogVolume" type="FogVolume" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_7x2g1")
 
 [node name="Area3D" type="Area3D" parent="FogVolume"]

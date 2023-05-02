@@ -14,14 +14,14 @@ uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t7c1"]
 transparency = 1
-albedo_color = Color(1, 0.5, 0.5, 0.32)
+albedo_color = Color(0.34902, 0.501961, 0.501961, 0.321569)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mc1u1"]
 material = SubResource("StandardMaterial3D_8t7c1")
-size = Vector3(10, 1, 10)
+size = Vector3(10, 2, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hs3x6"]
-size = Vector3(10, 1, 10)
+size = Vector3(10, 2, 10)
 
 [node name="Environment" instance=ExtResource("1_31vk5")]
 
@@ -30,12 +30,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7f7ta")
 surface_material_override/1 = SubResource("StandardMaterial3D_7s6uk")
 
 [node name="Block" type="StaticBody3D" parent="." index="21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31675, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Block" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, 2.08165e-12)
 mesh = SubResource("BoxMesh_mc1u1")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, 2.08165e-12)
 shape = SubResource("BoxShape3D_hs3x6")

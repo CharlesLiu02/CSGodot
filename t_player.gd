@@ -7,7 +7,7 @@ signal lives_decreased(lives)
 # Movement Parameters
 @export var speed = 6
 @export var acceleration = 15
-@export var jump_velocity = 8
+@export var jump_velocity = 10
 var spawn_positions = [Vector3(0, 2.5, -9), Vector3(0, 2.5, 11), Vector3(13, 2.6, 12), Vector3(-12, 2.6, 12), Vector3(-12, 2.6, 0), Vector3(12, 4, 0), Vector3(12, 4,-25), Vector3(-12, 4,25), Vector3(12, 4,25), Vector3(25, 4, 12), Vector3(25, 4, -12), Vector3(-25, 4, -12), Vector3(-25, 4, 12)]
 var look_sensitivity = 0.0005
 var gravity = 25

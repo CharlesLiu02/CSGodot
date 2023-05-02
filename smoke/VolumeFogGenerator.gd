@@ -4,40 +4,44 @@ extends Node3D
 @export var smoke_volume = preload("res://smoke/smoke_volume.tscn")
 
 var sphere_radius = 5
-var current_layer = 0
 var queue = []
 var seen = []
-var max_layers = sphere_radius + 1
-var max_volume = 100
+var num_smoke = 0
+var max_smoke = 200
+var max_volume = 20
 var volume = 0
+var directions = [Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, -1, 0), Vector3(0, 0, -1)]
 
 func _ready():
 	# Create the initial voxel at the center
 	create_volume(Vector3.ZERO)
-#	queue.clear()
-#	queue.append(Vector3.ZERO)
-#	seen.clear()
-#	seen.append(Vector3.ZERO)
+	queue.clear()
+	queue_append_neighbors(Vector3.ZERO)
+	seen.clear()
+	seen.append(Vector3.ZERO)
 
 func _process(delta):
-	if current_layer < max_layers && volume < max_volume:
-		current_layer += 1
-		start_build_layer(current_layer)
+	if volume < max_volume:
+		start_build_layer()
 
-func start_build_layer(layer):
-	for x in range(-sphere_radius, sphere_radius + 1):
-		for y in range(-sphere_radius, sphere_radius + 1):
-			for z in range(-sphere_radius, sphere_radius + 1):
-				if round(sqrt(x * x + y * y + z * z)) == layer:
-					var pos = Vector3(x, y, z)
-					if is_occupied(pos):
-						continue
+func queue_append_neighbors(pos):
+	for dir in directions:
+		if not is_occupied(pos+dir) and not pos+dir in seen and not pos+dir in queue:
+			queue.append(pos+dir)
 
-					if round(sqrt(pos.x * pos.x + pos.y * pos.y + pos.z * pos.z)) <= sphere_radius:
-						create_volume(pos)
-	
-	
-						
+func start_build_layer():
+	while(queue.size() > 0 and max_smoke > num_smoke):
+		queue.sort_custom(func(a, b): return a.length() < b.length())
+		var pos = queue.pop_front();
+		print("Dist: " + str(pos.length()) + " " + str(sphere_radius))
+		if round(pos.length()) <= sphere_radius:
+			num_smoke += 1
+			print("Creating smoke at:" + str(pos) + " " + str(num_smoke))
+			create_volume(pos)
+			seen.append(pos)
+			queue_append_neighbors(pos)
+
+
 func create_volume(pos: Vector3):
 	var v = smoke_volume.instantiate()
 	add_child(v)
@@ -54,8 +58,6 @@ func is_occupied(pos: Vector3) -> bool:
 	var result = state.intersect_point(query)
 	
 	if result:
-		print("Checking position! " + str(pos) + " | Result: [True]" + str(result))
 		return true
 	else:
-		print("Checking position! " + str(pos) + " | Result: [False]" + str(result))
 		return false
