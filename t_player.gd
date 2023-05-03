@@ -19,8 +19,11 @@ var is_reloading = false
 @onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
 @onready var grenade_toss_pos = $GrenadeTossPos
 @onready var selected_grenade = "smoke"
+@onready var b_decal = preload("res://bullet_decal.tscn")
+@onready var shot_timer = $Timer
 
 var health = 100
+var ammo = 30
 @export var lives = 5
 
 # Weapon Parameters
@@ -106,14 +109,50 @@ func check_animation():
 func fire():
 	if is_reloading:
 		return
+	if ammo == 0:
+		reload()
+		return
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
+	
+	shot_timer.set_paused(true)
+	var recoil = calc_recoil()
+	camera.rotate_x(recoil.x)
+	camera.rotate_y(recoil.y)
+	raycast.rotate_x(recoil.x)
+	raycast.rotate_y(recoil.y)
+	
 	if raycast.is_colliding():
 		var hit_object = raycast.get_collider()
 		# Check if collision object is another player
 		if hit_object.has_method("receive_damage"):
 		# Make other player take damage
 			hit_object.receive_damage.rpc_id(hit_object.get_multiplayer_authority())
+		else:
+			var b = b_decal.instantiate()
+			#hit_object.add_child(b)
+			get_tree().get_root().add_child(b)
+			b.global_transform.origin = raycast.get_collision_point()
+			var surface_dir_up = Vector3(0,1,0)
+			var surface_dir_down = Vector3(0,-1,0)
+			
+			if raycast.get_collision_normal() == surface_dir_up:
+				b.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.RIGHT)
+			elif raycast.get_collision_normal() == surface_dir_down:
+				b.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.RIGHT)
+			else:
+				b.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.DOWN)
+	
+	ammo -= 1
+	shot_timer.set_paused(false)
+	shot_timer.start(0.1)
+	await shot_timer.timeout
+	
+	shot_timer.start(0.55)
+	camera.rotate_x(-recoil.x)
+	camera.rotate_y(-recoil.y)
+	raycast.rotate_x(-recoil.x)
+	raycast.rotate_y(-recoil.y)
 
 func throw_grenade():
 	var world_scene = get_node('/root/world')
@@ -121,6 +160,8 @@ func throw_grenade():
 
 func reload():
 	animation_player.play("rifle_reload001")
+	await animation_player.animation_finished
+	ammo = 30
 	
 func death():
 	is_dead = true
@@ -158,3 +199,18 @@ func receive_damage():
 		health = 0
 		death()
 	health_changed.emit(health)
+	
+func calc_recoil():
+	var n = 10
+	var recoil = Vector3(0, 0, 0)
+	var rng = RandomNumberGenerator.new()
+	
+	if shot_timer.get_time_left() == 0:
+		return recoil
+	
+	for i in range(n):
+		recoil.y += rng.randf_range(-0.06, 0.06)
+		recoil.x += rng.randf_range(0, 0.12)
+		
+	return (shot_timer.get_time_left() * 1.5 / n) * recoil
+	

@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://uus5keqwyq71"
-path.etc2="res://.godot/imported/Environment_dry_combustible01_17.png-641d6b8bf495b5d2f12b7cc9ba178e32.etc2.ctex"
+path.s3tc="res://.godot/imported/Environment_dry_combustible01_17.png-641d6b8bf495b5d2f12b7cc9ba178e32.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_dry_combustible01_17.png"
-dest_files=["res://.godot/imported/Environment_dry_combustible01_17.png-641d6b8bf495b5d2f12b7cc9ba178e32.etc2.ctex"]
+dest_files=["res://.godot/imported/Environment_dry_combustible01_17.png-641d6b8bf495b5d2f12b7cc9ba178e32.s3tc.ctex"]
 
 [params]
 

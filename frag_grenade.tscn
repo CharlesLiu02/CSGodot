@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://djv0753jh681v"]
+[gd_scene load_steps=5 format=3 uid="uid://dn2ovj5mtktaa"]
 
 [ext_resource type="PackedScene" uid="uid://vd70ajhn40gj" path="res://models/grenades/frag_grenade.glb" id="1_0hpx6"]
 [ext_resource type="Script" path="res://grenade.gd" id="1_5a32y"]

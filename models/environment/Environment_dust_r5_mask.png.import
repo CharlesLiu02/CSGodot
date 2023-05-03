@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cepmimd6bx7n1"
-path.etc2="res://.godot/imported/Environment_dust_r5_mask.png-083103a84cf0df01fa8785c1fd29c8ad.etc2.ctex"
+path.s3tc="res://.godot/imported/Environment_dust_r5_mask.png-083103a84cf0df01fa8785c1fd29c8ad.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_dust_r5_mask.png"
-dest_files=["res://.godot/imported/Environment_dust_r5_mask.png-083103a84cf0df01fa8785c1fd29c8ad.etc2.ctex"]
+dest_files=["res://.godot/imported/Environment_dust_r5_mask.png-083103a84cf0df01fa8785c1fd29c8ad.s3tc.ctex"]
 
 [params]
 

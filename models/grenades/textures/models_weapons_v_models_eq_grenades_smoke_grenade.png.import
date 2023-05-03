@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2g17neqy6utm"
-path.etc2="res://.godot/imported/models_weapons_v_models_eq_grenades_smoke_grenade.png-17a1b2637628f5217285cfbd6a9b6fa9.etc2.ctex"
+path.s3tc="res://.godot/imported/models_weapons_v_models_eq_grenades_smoke_grenade.png-17a1b2637628f5217285cfbd6a9b6fa9.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://models/grenades/textures/models_weapons_v_models_eq_grenades_smoke_grenade.png"
-dest_files=["res://.godot/imported/models_weapons_v_models_eq_grenades_smoke_grenade.png-17a1b2637628f5217285cfbd6a9b6fa9.etc2.ctex"]
+dest_files=["res://.godot/imported/models_weapons_v_models_eq_grenades_smoke_grenade.png-17a1b2637628f5217285cfbd6a9b6fa9.s3tc.ctex"]
 
 [params]
 

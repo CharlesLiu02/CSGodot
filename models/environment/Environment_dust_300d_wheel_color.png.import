@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmyf7cmi5sewj"
-path.etc2="res://.godot/imported/Environment_dust_300d_wheel_color.png-cce0ad89b7d42e8214ee4003e0f600da.etc2.ctex"
+path.s3tc="res://.godot/imported/Environment_dust_300d_wheel_color.png-cce0ad89b7d42e8214ee4003e0f600da.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_dust_300d_wheel_color.png"
-dest_files=["res://.godot/imported/Environment_dust_300d_wheel_color.png-cce0ad89b7d42e8214ee4003e0f600da.etc2.ctex"]
+dest_files=["res://.godot/imported/Environment_dust_300d_wheel_color.png-cce0ad89b7d42e8214ee4003e0f600da.s3tc.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world.gd" id="1_6rq4i"]
 [ext_resource type="Texture2D" uid="uid://jvxt6m88ttv6" path="res://textures/crosshair1.png" id="3_2owff"]
-[ext_resource type="PackedScene" uid="uid://c8eg3gpn00udt" path="res://environment.tscn" id="3_y34gk"]
+[ext_resource type="PackedScene" uid="uid://b4e2cado1wjec" path="res://environment.tscn" id="3_y34gk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yx4hf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

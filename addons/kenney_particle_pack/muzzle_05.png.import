@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6cvd4jnoky77"
-path.etc2="res://.godot/imported/muzzle_05.png-4495385d4c2765cb6d5ce751f8e0b962.etc2.ctex"
+path.s3tc="res://.godot/imported/muzzle_05.png-4495385d4c2765cb6d5ce751f8e0b962.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/kenney_particle_pack/muzzle_05.png"
-dest_files=["res://.godot/imported/muzzle_05.png-4495385d4c2765cb6d5ce751f8e0b962.etc2.ctex"]
+dest_files=["res://.godot/imported/muzzle_05.png-4495385d4c2765cb6d5ce751f8e0b962.s3tc.ctex"]
 
 [params]
 
