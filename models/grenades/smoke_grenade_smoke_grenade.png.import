@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbvjumfovj630"
-path.etc2="res://.godot/imported/smoke_grenade_smoke_grenade.png-a576c3a3a101946c0df3e0f9942206d8.etc2.ctex"
+path.s3tc="res://.godot/imported/smoke_grenade_smoke_grenade.png-a576c3a3a101946c0df3e0f9942206d8.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/grenades/smoke_grenade_smoke_grenade.png"
-dest_files=["res://.godot/imported/smoke_grenade_smoke_grenade.png-a576c3a3a101946c0df3e0f9942206d8.etc2.ctex"]
+dest_files=["res://.godot/imported/smoke_grenade_smoke_grenade.png-a576c3a3a101946c0df3e0f9942206d8.s3tc.ctex"]
 
 [params]
 

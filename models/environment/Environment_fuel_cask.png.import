@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbq7mchhmpk2f"
-path.etc2="res://.godot/imported/Environment_fuel_cask.png-229f3c19580db8b5b6e104d0c2f19ad3.etc2.ctex"
+path.s3tc="res://.godot/imported/Environment_fuel_cask.png-229f3c19580db8b5b6e104d0c2f19ad3.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_fuel_cask.png"
-dest_files=["res://.godot/imported/Environment_fuel_cask.png-229f3c19580db8b5b6e104d0c2f19ad3.etc2.ctex"]
+dest_files=["res://.godot/imported/Environment_fuel_cask.png-229f3c19580db8b5b6e104d0c2f19ad3.s3tc.ctex"]
 
 [params]
 

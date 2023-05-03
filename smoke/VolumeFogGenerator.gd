@@ -8,7 +8,8 @@ var queue = []
 var seen = []
 var num_smoke = 0
 var max_smoke = 200
-var max_volume = 20
+var max_volume = 200
+var max_spawn_per_frame = 10
 var volume = 0
 var directions = [Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, -1, 0), Vector3(0, 0, -1)]
 
@@ -30,13 +31,17 @@ func queue_append_neighbors(pos):
 			queue.append(pos+dir)
 
 func start_build_layer():
-	while(queue.size() > 0 and max_smoke > num_smoke):
+	var num_spawned_frame = 0
+	# Continue to spawn smokes under the conditions that:
+	# - there are still items in the queue
+	# - we haven't reached the max_smoke limit yet
+	# - we haven't exceeded the max spawn per fram yet
+	while(queue.size() > 0 and max_smoke > num_smoke and max_spawn_per_frame > num_spawned_frame):
 		queue.sort_custom(func(a, b): return a.length() < b.length())
 		var pos = queue.pop_front();
-		print("Dist: " + str(pos.length()) + " " + str(sphere_radius))
 		if round(pos.length()) <= sphere_radius:
 			num_smoke += 1
-			print("Creating smoke at:" + str(pos) + " " + str(num_smoke))
+			num_spawned_frame += 1
 			create_volume(pos)
 			seen.append(pos)
 			queue_append_neighbors(pos)

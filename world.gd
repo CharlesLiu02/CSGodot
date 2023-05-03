@@ -9,6 +9,7 @@ extends Node
 const T_player = preload("res://t_player.tscn")
 const smoke_grenade = preload("res://smoke_grenade.tscn")
 const frag_grenade = preload("res://frag_grenade.tscn")
+@export var bullet_wake_scene = preload("res://smoke/bullet_wake.tscn")
 const PORT = 9999 # Port for server to live on
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -76,7 +77,35 @@ func throw_grenade(selected_grenade, grenade_toss_pos_transform):
 	
 	add_child(grenade, true)
 	grenade.global_transform = grenade_toss_pos_transform
-	grenade.apply_impulse(-grenade.global_transform.basis.z * 16.0)
+	grenade.apply_impulse(-grenade.global_transform.basis.z * 10.0)
+	
+@rpc("any_peer", "call_local")
+func create_bullet_wake(head, space_state):
+	var from = head.global_position
+	var to = from + -head.global_transform.basis.z * 1000.0
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	
+	var hit_position: Vector3
+	var result = space_state.intersect_ray(query)
+	if result:
+		hit_position = result.position
+	else:
+		hit_position = to
+		
+	var wake = bullet_wake_scene.instantiate()
+	add_child(wake)
+	wake.global_position = (from + hit_position) / 2
+	wake.look_at(hit_position)
+	wake.set_length(from.distance_to(hit_position))
+	
+	
+#	var wake = bullet_wake_scene.instantiate()
+#	add_child(wake, true)
+#	print(wake)
+#	wake.global_position = (from + to) / 2
+#	wake.look_at(to)
+#	print("Creating bullet wake: " + str(from) + " " + str(to))
+#	wake.set_length(from.distance_to(to))
 
 func _on_multiplayer_spawner_spawned(node):
 	if node.is_multiplayer_authority():

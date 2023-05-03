@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpdx0a8ai1hyx"
-path.etc2="res://.godot/imported/Environment_military_case_02_color.png-3853a07fd70e7df8756f6aa3b042f044.etc2.ctex"
+path.s3tc="res://.godot/imported/Environment_military_case_02_color.png-3853a07fd70e7df8756f6aa3b042f044.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_military_case_02_color.png"
-dest_files=["res://.godot/imported/Environment_military_case_02_color.png-3853a07fd70e7df8756f6aa3b042f044.etc2.ctex"]
+dest_files=["res://.godot/imported/Environment_military_case_02_color.png-3853a07fd70e7df8756f6aa3b042f044.s3tc.ctex"]
 
 [params]
 

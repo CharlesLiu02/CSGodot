@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kbn84q1ou8ih"
-path.etc2="res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_masks1.png-75171761e030661756c71f74e38876be.etc2.ctex"
+path.s3tc="res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_masks1.png-75171761e030661756c71f74e38876be.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/characters/t_model_tm_phoenix_v2_body_varianti_masks1.png"
-dest_files=["res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_masks1.png-75171761e030661756c71f74e38876be.etc2.ctex"]
+dest_files=["res://.godot/imported/t_model_tm_phoenix_v2_body_varianti_masks1.png-75171761e030661756c71f74e38876be.s3tc.ctex"]
 
 [params]
 

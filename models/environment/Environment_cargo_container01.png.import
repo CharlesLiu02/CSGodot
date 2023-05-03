@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ba0ol15sb6tvq"
-path.etc2="res://.godot/imported/Environment_cargo_container01.png-8ad76b5c1c5d4d17d72b72d296c81543.etc2.ctex"
+path.s3tc="res://.godot/imported/Environment_cargo_container01.png-8ad76b5c1c5d4d17d72b72d296c81543.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://models/environment/Environment_cargo_container01.png"
-dest_files=["res://.godot/imported/Environment_cargo_container01.png-8ad76b5c1c5d4d17d72b72d296c81543.etc2.ctex"]
+dest_files=["res://.godot/imported/Environment_cargo_container01.png-8ad76b5c1c5d4d17d72b72d296c81543.s3tc.ctex"]
 
 [params]
 

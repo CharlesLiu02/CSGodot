@@ -7,7 +7,7 @@ signal lives_decreased(lives)
 # Movement Parameters
 @export var speed = 6
 @export var acceleration = 15
-@export var jump_velocity = 10
+@export var jump_velocity = 12
 var spawn_positions = [Vector3(0, 2.5, -9), Vector3(0, 2.5, 11), Vector3(13, 2.6, 12), Vector3(-12, 2.6, 12), Vector3(-12, 2.6, 0), Vector3(12, 4, 0), Vector3(12, 4,-25), Vector3(-12, 4,25), Vector3(12, 4,25), Vector3(25, 4, 12), Vector3(25, 4, -12), Vector3(-25, 4, -12), Vector3(-25, 4, 12)]
 var look_sensitivity = 0.0005
 var gravity = 25
@@ -110,10 +110,17 @@ func fire():
 	muzzle_flash.emitting = true
 	if raycast.is_colliding():
 		var hit_object = raycast.get_collider()
+		create_bullet_wake()
 		# Check if collision object is another player
 		if hit_object.has_method("receive_damage"):
 		# Make other player take damage
 			hit_object.receive_damage.rpc_id(hit_object.get_multiplayer_authority())
+			
+func create_bullet_wake():
+	var world_scene = get_node('/root/world')
+	var from = grenade_toss_pos.global_position
+	var to = raycast.get_collision_point()
+	world_scene.rpc("create_bullet_wake", grenade_toss_pos, get_world_3d().direct_space_state)
 
 func throw_grenade():
 	var world_scene = get_node('/root/world')

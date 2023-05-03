@@ -1,6 +1,6 @@
 extends FogVolume
 
-@export var density_path: String = 'shader_parameter/density'
+@export var density_path: String = 'density'
 @export var smoke_density: float = 8.0
 
 @export var spawn_time: float = 1.0
