@@ -1,8 +1,8 @@
+FogVolume
 CollisionShape3D
 Area3D
 StaticBody3D
 MeshInstance3D
-FogVolume
 WorldEnvironment
 Label
 TextureRect

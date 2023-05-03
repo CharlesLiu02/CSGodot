@@ -18,6 +18,7 @@ properties/1/sync = true
 [node name="SmokeGrenade" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 5
+mass = 4.2
 script = ExtResource("1_c8krn")
 
 [node name="smoke_grenade" parent="." instance=ExtResource("1_tq2xg")]
