@@ -129,37 +129,97 @@ if move_right:
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
 						<h2 class="fh5co-heading">Smokes</h2>
-						<p></p>
+						<p>To implement CS:GO style smokes, we used the volumetric fog nodes that were recently added in Godot 4.0. Using the correct shaders, we were able to give the volumetric fog an appearance similar to realistic fog by adding simplex noise and modifying the smoke to rise slowly. Initially, we implemented the smoke grenade by creating a singular spherical volumetric fog at the location of the grenade but quickly realized that the smoke would pass through solid objects. To fix this problem, we began by creating smaller smoke spheres at the location of the grenade, then using a custom flood fill algorithm to fill the volume of the surrounding area while still maintaining a generally spherical shape. After we got our volumetric smoke implementation working, we implemented the new CS2 frag grenades which are capable of dispelling smoke after they explode. To do this, we used Godot’s negative fog density which effectively can be used to defog any area that has fog density already. Then, we used this same feature to implement bullet wakes, in which when bullets pass through the smoke, we create a cylinder of negative density fog in order to dispel the smoke in the bullet's path. Doing some math we computed the location, direction, and length of the cylinders in order for it to follow the raytracer. Tweaking the different smoke-created parameters allowed us to get some pretty exciting and realistic results that were pretty similar to CS2’s smoke features.
+	</p>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
+						<h2 class="fh5co-heading">Multiplayer</h2>
+						<p>All of the features mentioned above also work for multiplayer. This includes seeing other players’ movements, interacting with grenades, and shooting and receiving damage from other players. This was achieved by utilizing Godot’s MultiplayerSpawner and MultiplayerSychronizer nodes. We also used RPC calls to communicate between the client and the server.
+</p>
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
 						<h2 class="fh5co-heading">Problems Encountered</h2>
-						<p></p>
+						<p>A problem that we encountered was creating animations for the weapon, specifically creating keyframe animations. No one in the group had experience with rigging and animating so we had to search for tutorials to learn. Another issue that we encountered was spawning grenades with a realistic trajectory and making sure that their positions were absolute positions. Initially, the grenades were all being spawned as child instances of the player, which meant that the grenades were also moving with the player, even after they were thrown. We fixed this issue by spawning grenades as the world environment inside, which ensured that their positions would not be affected by the positions of the players. Another problem we encountered was correctly mapping collision layers for the various objects in our scene. We didn’t want our players to collide with the grenades because they were being spawned within the player’s hitbox. </p>
+						<p>Another problem we encountered when adding recoil was how to implement camera shake to make it look more realistic. More specifically, we had trouble shaking the camera without changing the position of the raycast after the player stopped firing. To ensure that the crosshair was still an accurate representation of the raycast, we rotated the raycast by some amount, waited a split second, then rotated it again by the same amount in the other direction. This ensured that the position of the raycast was unchanged and that the player could actually see the visual effects of the camera shake. In order to calculate the amount of recoil that would affect the camera and raycast, we used a Monte-Carlo estimator over a random number generator. We found this to be the best way to generate randomness in the recoil while maintaining a level of accuracy and controllability. On top of that, we used a timer to measure the time between each shot. As the time between each shot decreases, the recoil increases because each shot is being fired in quicker succession, so it makes sense that the recoil should be more punishing in that situation. On the other hand, allowing more time between each shot significantly reduces recoil, which is supposed to reward the player for trying to be more precise.</p>
+						<p>One problem we encountered was when trying to create cylinders in order to implement bullet wakes. We tried to lengthen the cylinder by extending it in the Z direction, however eventually discovered after a lot of blood, sweat, and testing that cylinders cannot be extended in the Z direction for some reason and may only be extended in the Y direction, perhaps to maintain the circular shape of the cylinder. In the process of trying to debug, we also discovered a few interesting bugs in which certain variables were sometimes updated unexpectedly and passed by reference rather than by value.</p>
+						<p>As aforementioned in the smoke section, we found the realistic space-filling implementation to be particularly tricky. At first, we ran into many issues with object detection and figuring out how to actually place the smaller smoke spheres in places without any other objects. Implementing the flood fill algorithm proved to be a Leetcode-like exercise, but careful attention to the order in which the smaller smoke spheres are created was vital to making a realistic implementation. For this, we wanted to use a priority queue, however, we discovered that there was no priority queue. Rather than implementing it ourselves, we decided to opt for the simpler strategy of sorting a list of locations to place smokes from closest to farthest. Though this is the more inefficient method, there are really only so many smokes that are needed to be small so it is close to constant speed every time anyways. In addition, we spaced out the spawning of the smoke over a few frames in order to create a more realistic and natural appearance of the smoke grenade.</p>
+
+						<p>Lastly, when testing out our shooting implementation, we discovered that while holding down left click didn’t continue to fire the weapon, if we moved our mouse around at the same time, it would fire impossibly fast and empty the magazine almost instantly. We found out that this was because our program will also check for any mouse clicks when it detects mouse movement, so by moving our mouse while holding left click, we unintentionally called the fire function and shot the gun for every frame that we were moving the mouse, which was a lot. We worked around this by adding a timer to limit the gun’s fire rate, which we checked every time the fire function was called. This way, even though the fire function was continuously called, actually shooting the gun was limited by the fire rate. We fixed the issue with not firing when we were holding down left click by setting a shooting flag to true when we left-clicked and setting it to false when we let go of left click. Then, for every frame, we fire the weapon if the shooting flag is true.</p>
+
+						<p>Needless to say, we ran into many issues during this project.</p>
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
 						<h2 class="fh5co-heading">Lessons Learned</h2>
-						<p></p>
+						<p>This project served as a brief excursion into the vast world of game development. We picked up a lot of different and unexpected skills along the way and followed a handful of different tutorials. We learned that applying the correct texturing and animating is a lot harder than it seems, especially adjusting the materials to get the correct texture and creating keyframes for animation. We also realized the importance of implementing realistic lightning, player movement, and creating an interactive game with clear objectives so that it feels realistic for the user. Finally, we learned how important it is to have efficient communication and collaboration when working on a project with so many different parts because as more features were added, it was imperative that we made sure that they would not break existing features. Ultimately, this experience proved to be an eye-opening journey into the life of a Valve employee. Now, we finally understand why CS2 has taken so long to develop.
+</p>
 					</div>
 				</div>
+
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
 						<h2 class="fh5co-heading">Results</h2>
-						<p></p>
+						<p>Results here</p>
+</p>
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
 						<h2 class="fh5co-heading">References</h2>
-						<p></p>
+						<ul>
+							<li><a href="https://docs.godotengine.org/en/3.1/tutorials/3d/fps_tutorial/index.html" target="_blank">Godot FPS Tutorial</a></li>
+							<li><a href="https://godotengine.org/article/fog-volumes-arrive-in-godot-4/" target="_blank">Fog Volumes in Godot article</a></li>
+							<li><a href="https://advances.realtimerendering.com/s2014/wronski/bwronski_volumetric_fog_siggraph2014.pdf" target="_blank">Talk by Bartlomiej Wronski, “Volumetric Fog: Unified compute shader based solution to atmospheric scattering”</a></li>
+							<li><a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html" target="_blank">Godot documentation</a></li>
+							<li><a href="https://ctwobosius.github.io/Deviant3D/" target="_blank">Deviant3D - past CS 184 project</a></li>
+							<li><a href="https://www.youtube.com/watch?v=IV6XP-EDzw8&t=153s" target="_blank">FPS Animations in Blender</a></li>
+							<li><a href="https://godotengine.org/article/multiplayer-in-godot-4-0-scene-replication/" target="_blank">Multiplayer in Godot</a></li>
+						</ul>
 					</div>
 				</div>
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-10 animate-box" data-animate-effect="fadeInLeft">
 						<h2 class="fh5co-heading">Contributions</h2>
-						<p></p>
+						<p><strong>Andrew Shen</strong></p>
+						<ul>
+							<li>Implemented smoke grenades using volumetric fog nodes recently added to Godot 4.0
+</li>
+							<li>Implemented flood fill algorithm to create space filling smoke grenades</li>
+							<li>Implemented frag grenades that remove smokes</li>
+							<li>Found shaders for realistic smokes</li>
+							<li>Implemented bullet wakes, allowing bullets to separate the fog as in real life</li>
+						</ul>
+						<p><strong>Charles Liu</strong></p>
+						<ul>
+							<li>Made project proposal</li>
+							<li>Created starter code for Godot project</li>
+							<li>Implemented player movement and kinetics</li>
+							<li>Implemented muzzle flash for weapon firing</li>
+							<li>Created UI for multiplayer and player HUD</li>
+							<li>Created game loop</li>
+							<li>Implemented multiplayer spawning for players and grenades</li>
+							<li>Added sound effects for weapon firing and reloading and grenades</li>
+						</ul>
+						<p><strong>Lena Kushigemachi</strong></p>
+						<ul>
+							<li>Created environment models and textures in Blender</li>
+							<li>Researched asset models for characters and weapons</li>
+							<li>Textured models in Blender</li>
+							<li>Rigged and animated character models in Blender</li>
+						</ul>
+						<p><strong>Ryan Chan</strong></p>
+						<ul>
+							<li>Implemented raycasting for shooting physics and collision detection</li>
+							<li>Implemented basic recoil when shooting</li>
+							<li>Added bullet holes and reload logic</li>
+							<li>Made deliverables for milestone and final webpages</li>
+							<li>Made final video, rendered images, and created final presentation slides</li>
+						</ul>
 					</div>
 				</div>
 			</div>
