@@ -1,3 +1,6 @@
+Timer
+AudioStreamPlayer3D
+Label
 WorldEnvironment
 MultiplayerSynchronizer
 MeshInstance3D
@@ -6,14 +9,11 @@ Node3D
 FogVolume
 CollisionShape3D
 Area3D
-Label
 TextureRect
 Camera3D
-AudioStreamPlayer3D
 MultiplayerSpawner
 Node
 RemoteTransform3D
-Timer
 RigidBody3D
 RichTextLabel
 Control

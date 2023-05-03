@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal health_changed(health_value)
 signal lives_decreased(lives)
+signal ammo_changed(ammo)
 
 # Movement Parameters
 @export var speed = 6
@@ -15,12 +16,14 @@ var curr_velocity = 0
 var curr_velocity_y = 0
 var is_dead = false
 var is_reloading = false
+var is_shooting = false
 @onready var camera = $Camera3D
 @onready var muzzle_flash = $Camera3D/t_model/MuzzleFlash
 @onready var grenade_toss_pos = $GrenadeTossPos
 @onready var selected_grenade = "smoke"
 @onready var b_decal = preload("res://bullet_decal.tscn")
-@onready var shot_timer = $Timer
+@onready var recoil_timer = $Timer
+@onready var shot_timer = $Timer2
 
 var health = 100
 var ammo = 30
@@ -29,7 +32,7 @@ var ammo = 30
 # Weapon Parameters
 @onready var animation_player = $Camera3D/t_model/AnimationPlayer
 @onready var raycast = $GrenadeTossPos/RayCast3D
-@onready var audio_player = $AudioStreamPlayer3D
+@onready var audio_player = $FireAudioStreamPlayer3D
 
 var camera_anglev = 0
 
@@ -71,6 +74,10 @@ func _physics_process(delta):
 	# Toggle mouse
 	if Input.is_action_just_pressed("ui_cancel"): 
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+	
+func _process(delta):
+	if is_shooting:
+		fire()
 
 func _input(event):
 	if is_dead or not is_multiplayer_authority():
@@ -98,6 +105,9 @@ func check_animation():
 	muzzle_flash.emitting = false
 	if Input.is_action_pressed("fire"):
 		fire()
+		is_shooting = true
+	elif Input.is_action_just_released("fire"):
+		is_shooting = false
 	elif Input.is_action_pressed("reload"):
 		reload()
 		is_reloading = true
@@ -107,6 +117,8 @@ func check_animation():
 
 # Weapon Fire functions
 func fire():
+	if shot_timer.get_time_left() > 0:
+		return
 	if is_reloading:
 		return
 	if ammo == 0:
@@ -115,23 +127,24 @@ func fire():
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
 	
-	shot_timer.set_paused(true)
+	recoil_timer.set_paused(true)
 	var recoil = calc_recoil()
 	camera.rotate_x(recoil.x)
 	camera.rotate_y(recoil.y)
 	raycast.rotate_x(recoil.x)
 	raycast.rotate_y(recoil.y)
 	
+	create_bullet_wake_local()
+	
 	if raycast.is_colliding():
 		var hit_object = raycast.get_collider()
-		create_bullet_wake()
+		audio_player.play()
 		# Check if collision object is another player
 		if hit_object.has_method("receive_damage"):
 		# Make other player take damage
 			hit_object.receive_damage.rpc_id(hit_object.get_multiplayer_authority())
 		else:
 			var b = b_decal.instantiate()
-			#hit_object.add_child(b)
 			get_tree().get_root().add_child(b)
 			b.global_transform.origin = raycast.get_collision_point()
 			var surface_dir_up = Vector3(0,1,0)
@@ -145,21 +158,36 @@ func fire():
 				b.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.DOWN)
 	
 	ammo -= 1
-	shot_timer.set_paused(false)
-	shot_timer.start(0.1)
-	await shot_timer.timeout
+	ammo_changed.emit(ammo)
+	#shot_timer.set_paused(false)
+	shot_timer.start(0.15)
 	
-	shot_timer.start(0.55)
+	recoil_timer.set_paused(false)
+	recoil_timer.start(0.1)
+	await recoil_timer.timeout
+	
+	recoil_timer.start(0.55)
 	camera.rotate_x(-recoil.x)
 	camera.rotate_y(-recoil.y)
 	raycast.rotate_x(-recoil.x)
 	raycast.rotate_y(-recoil.y)
 			
-func create_bullet_wake():
+func create_bullet_wake_local():
 	var world_scene = get_node('/root/world')
 	var from = grenade_toss_pos.global_position
-	var to = raycast.get_collision_point()
-	world_scene.rpc("create_bullet_wake", grenade_toss_pos, get_world_3d().direct_space_state)
+	var to = from + -grenade_toss_pos.global_transform.basis.z * 1000.0
+	
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	var space_state = get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(query)
+	var hit_position: Vector3
+
+	if result:
+		hit_position = result.position
+	else:
+		hit_position = to
+	print("here")
+	world_scene.rpc("create_bullet_wake", from, hit_position)
 
 func throw_grenade():
 	var world_scene = get_node('/root/world')
@@ -169,6 +197,7 @@ func reload():
 	animation_player.play("rifle_reload001")
 	await animation_player.animation_finished
 	ammo = 30
+	ammo_changed.emit(ammo)
 	
 func death():
 	is_dead = true
@@ -211,13 +240,12 @@ func calc_recoil():
 	var n = 10
 	var recoil = Vector3(0, 0, 0)
 	var rng = RandomNumberGenerator.new()
-	
-	if shot_timer.get_time_left() == 0:
+
+	if recoil_timer.get_time_left() == 0:
 		return recoil
-	
+
 	for i in range(n):
-		recoil.y += rng.randf_range(-0.06, 0.06)
-		recoil.x += rng.randf_range(0, 0.12)
-		
-	return (shot_timer.get_time_left() * 1.5 / n) * recoil
-	
+		recoil.y += rng.randf_range(-0.04, 0.04)
+		recoil.x += rng.randf_range(0, 0.08)
+
+	return (recoil_timer.get_time_left() * 1.5 / n) * recoil

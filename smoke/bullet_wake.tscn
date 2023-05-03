@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpy4clcyqrvdc"]
+[gd_scene load_steps=5 format=3 uid="uid://cpy4clcyqrvdc"]
 
 [ext_resource type="Script" path="res://smoke/bullet_wake.gd" id="1_jbcvx"]
 [ext_resource type="Script" path="res://smoke/inverse_smoke.gd" id="2_xvo1t"]
@@ -7,16 +7,9 @@
 density = -8.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_j6j67"]
-properties/0/path = NodePath("../Debug:position")
+properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
-properties/1/path = NodePath("../Debug:mesh")
-properties/1/spawn = true
-properties/1/sync = true
-
-[sub_resource type="Environment" id="Environment_ynsbo"]
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
 
 [node name="bullet_wake" type="Node3D"]
 script = ExtResource("1_jbcvx")
@@ -33,8 +26,4 @@ sustain_time = 1.0
 fade_time = 3.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-root_path = NodePath("../BulletWakeVolume")
 replication_config = SubResource("SceneReplicationConfig_j6j67")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ynsbo")

@@ -5,11 +5,12 @@ extends Node
 @onready var hud = $CanvasLayer/HUD
 @onready var health_label = $CanvasLayer/HUD/HealthLabel
 @onready var lives_label = $CanvasLayer/HUD/LivesLabel
+@onready var ammo_label = $CanvasLayer/HUD/AmmoLabel
 
 const T_player = preload("res://t_player.tscn")
 const smoke_grenade = preload("res://smoke_grenade.tscn")
 const frag_grenade = preload("res://frag_grenade.tscn")
-@export var bullet_wake_scene = preload("res://smoke/bullet_wake.tscn")
+const bullet_wake_scene = preload("res://smoke/bullet_wake.tscn")
 const PORT = 9999 # Port for server to live on
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -50,6 +51,7 @@ func add_t_player(peer_id):
 	if t_player.is_multiplayer_authority():
 		t_player.health_changed.connect(update_health)
 		t_player.lives_decreased.connect(update_lives)
+		t_player.ammo_changed.connect(update_ammo)
 	
 func update_health(health_value):
 	health_label.text = "Health: " + str(health_value)
@@ -59,6 +61,9 @@ func update_lives(lives):
 		lives_label.text = "YOU ARE DEAD"
 	else:
 		lives_label.text = "Lives: " + str(lives)
+		
+func update_ammo(ammo):
+	ammo_label.text = "Ammo: " + str(ammo)
 
 func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
@@ -76,41 +81,43 @@ func throw_grenade(selected_grenade, grenade_toss_pos_transform):
 	var grenade = selected_scene.instantiate()
 	
 	add_child(grenade, true)
+	print(str(get_children()) + " | " + str(get_multiplayer_authority()))
 	grenade.global_transform = grenade_toss_pos_transform
 	grenade.apply_impulse(-grenade.global_transform.basis.z * 10.0)
 	
 @rpc("any_peer", "call_local")
-func create_bullet_wake(head, space_state):
-	var from = head.global_position
-	var to = from + -head.global_transform.basis.z * 1000.0
-	var query = PhysicsRayQueryParameters3D.create(from, to)
-	
-	var hit_position: Vector3
-	var result = space_state.intersect_ray(query)
-	if result:
-		hit_position = result.position
-	else:
-		hit_position = to
-		
+func create_bullet_wake(from, hit_position):
+#	var query = PhysicsRayQueryParameters3D.create(from, to)
+#
+#	var hit_position: Vector3
+#	var space_state
+#	# Check if server or client call
+#
+#	if space_state_id_object.has_method("get_object_id"):
+#		# Client call
+#		var space_state_id = space_state_id_object.get_object_id()
+#		space_state = instance_from_id(space_state_id)
+#	else:
+#		# Server call
+#		space_state = space_state_id_object
+#	var result = space_state.intersect_ray(query)
+#	if result:
+#		hit_position = result.position
+#	else:
+#		hit_position = to
+#
 	var wake = bullet_wake_scene.instantiate()
-	add_child(wake)
+	add_child(wake, true)
+	print(str(get_children()) + " | " + str(get_multiplayer_authority()))
 	wake.global_position = (from + hit_position) / 2
 	wake.look_at(hit_position)
 	wake.set_length(from.distance_to(hit_position))
-	
-	
-#	var wake = bullet_wake_scene.instantiate()
-#	add_child(wake, true)
-#	print(wake)
-#	wake.global_position = (from + to) / 2
-#	wake.look_at(to)
-#	print("Creating bullet wake: " + str(from) + " " + str(to))
-#	wake.set_length(from.distance_to(to))
 
 func _on_multiplayer_spawner_spawned(node):
 	if node.is_multiplayer_authority():
 		node.health_changed.connect(update_health)
 		node.lives_decreased.connect(update_lives)
+		node.ammo_changed.connect(update_ammo)
 
 # Play online
 func upnp_setup():
