@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://df7ufrwxndwxn"]
+
+[ext_resource type="PackedScene" uid="uid://n124egvpo3um" path="res://models/environment/dust_2_b.glb" id="1_a4st5"]
+
+[node name="dust_2_b" instance=ExtResource("1_a4st5")]
+
+[node name="prop_static_77110" parent="." index="0"]
+transform = Transform3D(1.94707e-08, 0, -0.1, 0, 0.1, 0, 0.1, 0, 1.94707e-08, 83.007, 0, 260.209)

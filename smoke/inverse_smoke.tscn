@@ -1,9 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnhujswg0nayr"]
+[gd_scene load_steps=12 format=3 uid="uid://dnhujswg0nayr"]
 
 [ext_resource type="Script" path="res://smoke/inverse_smoke.gd" id="1_yhckt"]
+[ext_resource type="Texture2D" uid="uid://b6cvd4jnoky77" path="res://addons/kenney_particle_pack/muzzle_05.png" id="2_40lgc"]
+[ext_resource type="Script" path="res://smoke/explosion.gd" id="3_6o0y5"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_4qu5c"]
 density = -10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8jh7"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_40lgc")
+uv1_scale = Vector3(-1, -1, -1)
+texture_filter = 0
+disable_receive_shadows = true
+
+[sub_resource type="Gradient" id="Gradient_mqeqe"]
+colors = PackedColorArray(1, 0.129412, 0.129412, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2txmg"]
+gradient = SubResource("Gradient_mqeqe")
+
+[sub_resource type="Curve" id="Curve_3x2vq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.41354, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a3h68"]
+curve = SubResource("Curve_3x2vq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8jgrs"]
+direction = Vector3(0, 1, 0)
+spread = 68.77
+initial_velocity_min = 3.0
+initial_velocity_max = 8.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_a3h68")
+color_ramp = SubResource("GradientTexture1D_2txmg")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wabpo"]
+size = Vector2(0.05, 0.05)
 
 [node name="inverse_smoke" type="Node3D"]
 
@@ -15,3 +53,14 @@ script = ExtResource("1_yhckt")
 smoke_density = -8.0
 spawn_time = 0.1
 sustain_time = 0.2
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_p8jh7")
+emitting = false
+amount = 512
+one_shot = true
+explosiveness = 1.0
+randomness = 0.6
+process_material = SubResource("ParticleProcessMaterial_8jgrs")
+draw_pass_1 = SubResource("QuadMesh_wabpo")
+script = ExtResource("3_6o0y5")

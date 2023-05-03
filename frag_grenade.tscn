@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn2ovj5mtktaa"]
+[gd_scene load_steps=6 format=3 uid="uid://dn2ovj5mtktaa"]
 
 [ext_resource type="PackedScene" uid="uid://vd70ajhn40gj" path="res://models/grenades/frag_grenade.glb" id="1_0hpx6"]
 [ext_resource type="Script" path="res://frag_grenade.gd" id="1_7103b"]
+[ext_resource type="AudioStream" uid="uid://dy3nmtr12dnl7" path="res://sounds/explosion.wav" id="3_pasa4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_decd5"]
 radius = 0.149527
@@ -13,6 +14,9 @@ properties/0/sync = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/2/path = NodePath(".:visible")
+properties/2/spawn = true
+properties/2/sync = true
 
 [node name="FragGrenade" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000410721, -7.45058e-09, 2.94447e-05)
@@ -36,4 +40,8 @@ autostart = true
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_kkmdx")
 
+[node name="DunkAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_pasa4")
+
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]
+[connection signal="finished" from="DunkAudioStreamPlayer3D" to="." method="_on_dunk_stream_player_3d_finished"]

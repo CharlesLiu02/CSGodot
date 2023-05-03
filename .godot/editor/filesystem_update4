@@ -3,6 +3,9 @@ res://world.tscn
 res://smoke/bullet_wake.tscn
 res://smoke_grenade.tscn
 res://smoke/inverse_smoke.tscn
-res://smoke/inverse_smoke.gd
-res://world.gd
-res://t_player.gd
+res://environment.tscn
+res://dust_2_b.tscn
+res://smoke/smoke_volume.tscn
+res://smoke/square_smoke_volume.tscn
+res://frag_grenade.tscn
+res://frag_grenade.gd

@@ -8,7 +8,7 @@ signal ammo_changed(ammo)
 # Movement Parameters
 @export var speed = 6
 @export var acceleration = 15
-@export var jump_velocity = 12
+@export var jump_velocity = 8
 var spawn_positions = [Vector3(0, 2.5, -9), Vector3(0, 2.5, 11), Vector3(13, 2.6, 12), Vector3(-12, 2.6, 12), Vector3(-12, 2.6, 0), Vector3(12, 4, 0), Vector3(12, 4,-25), Vector3(-12, 4,25), Vector3(12, 4,25), Vector3(25, 4, 12), Vector3(25, 4, -12), Vector3(-25, 4, -12), Vector3(-25, 4, 12)]
 var look_sensitivity = 0.0005
 var gravity = 25
@@ -32,7 +32,9 @@ var ammo = 30
 # Weapon Parameters
 @onready var animation_player = $Camera3D/t_model/AnimationPlayer
 @onready var raycast = $GrenadeTossPos/RayCast3D
-@onready var audio_player = $FireAudioStreamPlayer3D
+@onready var audio_player_fire = $FireAudioStreamPlayer3D
+@onready var audio_player_reload = $ReloadAudioStreamPlayer3D
+@onready var audio_player_yeet = $YeetAudioStreamPlayer3D
 
 var camera_anglev = 0
 
@@ -138,7 +140,7 @@ func fire():
 	
 	if raycast.is_colliding():
 		var hit_object = raycast.get_collider()
-		audio_player.play()
+		audio_player_fire.play()
 		# Check if collision object is another player
 		if hit_object.has_method("receive_damage"):
 		# Make other player take damage
@@ -159,7 +161,6 @@ func fire():
 	
 	ammo -= 1
 	ammo_changed.emit(ammo)
-	#shot_timer.set_paused(false)
 	shot_timer.start(0.15)
 	
 	recoil_timer.set_paused(false)
@@ -186,15 +187,16 @@ func create_bullet_wake_local():
 		hit_position = result.position
 	else:
 		hit_position = to
-	print("here")
 	world_scene.rpc("create_bullet_wake", from, hit_position)
 
 func throw_grenade():
 	var world_scene = get_node('/root/world')
+	audio_player_yeet.play()
 	world_scene.rpc("throw_grenade", selected_grenade, grenade_toss_pos.global_transform)
 
 func reload():
 	animation_player.play("rifle_reload001")
+	audio_player_reload.play()
 	await animation_player.animation_finished
 	ammo = 30
 	ammo_changed.emit(ammo)

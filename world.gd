@@ -81,34 +81,13 @@ func throw_grenade(selected_grenade, grenade_toss_pos_transform):
 	var grenade = selected_scene.instantiate()
 	
 	add_child(grenade, true)
-	print(str(get_children()) + " | " + str(get_multiplayer_authority()))
 	grenade.global_transform = grenade_toss_pos_transform
 	grenade.apply_impulse(-grenade.global_transform.basis.z * 10.0)
 	
 @rpc("any_peer", "call_local")
 func create_bullet_wake(from, hit_position):
-#	var query = PhysicsRayQueryParameters3D.create(from, to)
-#
-#	var hit_position: Vector3
-#	var space_state
-#	# Check if server or client call
-#
-#	if space_state_id_object.has_method("get_object_id"):
-#		# Client call
-#		var space_state_id = space_state_id_object.get_object_id()
-#		space_state = instance_from_id(space_state_id)
-#	else:
-#		# Server call
-#		space_state = space_state_id_object
-#	var result = space_state.intersect_ray(query)
-#	if result:
-#		hit_position = result.position
-#	else:
-#		hit_position = to
-#
 	var wake = bullet_wake_scene.instantiate()
 	add_child(wake, true)
-	print(str(get_children()) + " | " + str(get_multiplayer_authority()))
 	wake.global_position = (from + hit_position) / 2
 	wake.look_at(hit_position)
 	wake.set_length(from.distance_to(hit_position))

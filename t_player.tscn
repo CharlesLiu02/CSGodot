@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv1204xqpcy84"]
+[gd_scene load_steps=14 format=3 uid="uid://cv1204xqpcy84"]
 
 [ext_resource type="Script" path="res://t_player.gd" id="1_0srre"]
 [ext_resource type="PackedScene" uid="uid://nik36u375a0f" path="res://t_model.tscn" id="2_lb0sb"]
 [ext_resource type="Texture2D" uid="uid://csu7jul7l2025" path="res://addons/kenney_particle_pack/star_06.png" id="3_uoh5u"]
 [ext_resource type="AudioStream" uid="uid://bgm5o0t7fd8mn" path="res://sounds/ak47/ak47-1.wav" id="4_fmj4d"]
+[ext_resource type="AudioStream" uid="uid://cwxuja335coqe" path="res://sounds/reload.wav" id="5_rt5aw"]
+[ext_resource type="AudioStream" uid="uid://ebw6yg44y351" path="res://sounds/grenade_out.wav" id="6_wtdqy"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aypfv"]
 properties/0/path = NodePath(".:position")
@@ -61,7 +63,7 @@ size = Vector2(0.5, 0.5)
 size = Vector3(0.829009, 2.192, 0.968253)
 
 [node name="t_player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92325, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_0srre")
@@ -101,6 +103,7 @@ shape = SubResource("BoxShape3D_552fk")
 
 [node name="FireAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_fmj4d")
+volume_db = -80.0
 max_db = -2.0
 
 [node name="Timer" type="Timer" parent="."]
@@ -111,4 +114,8 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="ReloadAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_rt5aw")
+
+[node name="YeetAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_wtdqy")

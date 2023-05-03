@@ -1,5 +1,7 @@
-Timer
+GPUParticles3D
 AudioStreamPlayer3D
+AudioListener3D
+Timer
 Label
 WorldEnvironment
 MultiplayerSynchronizer
@@ -28,5 +30,3 @@ CharacterBody3D
 BoneAttachment3D
 PhysicalBone3D
 Skeleton3D
-GPUParticles3D
-AnimationTree

@@ -14,7 +14,9 @@ uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8t7c1"]
 transparency = 1
-albedo_color = Color(0.34902, 0.501961, 0.501961, 0.321569)
+albedo_color = Color(1, 1, 1, 0.827451)
+albedo_texture = ExtResource("3_s6cgh")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mc1u1"]
 material = SubResource("StandardMaterial3D_8t7c1")
