@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://klljovut15vd"]
+
+[ext_resource type="Script" path="res://smoke/smoke.gd" id="1_2j5ha"]
+[ext_resource type="Shader" path="res://smoke.gdshader" id="1_s0bm1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0e5yy"]
+shader = ExtResource("1_s0bm1")
+shader_parameter/density = 8.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/height_falloff = 0.2
+shader_parameter/edge_fade = 0.5
+
+[node name="SmokeVolume" type="FogVolume"]
+shape = 0
+material = SubResource("ShaderMaterial_0e5yy")
+script = ExtResource("1_2j5ha")
+smoke_density = 5.0
+sustain_time = 5.0
+fade_time = 8.0

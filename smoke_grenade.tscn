@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxnod5ied2tpb"]
+
+[ext_resource type="Script" path="res://grenade.gd" id="1_c8krn"]
+[ext_resource type="PackedScene" uid="uid://mdnl0p575u5o" path="res://models/grenades/smoke_grenade.glb" id="1_tq2xg"]
+[ext_resource type="AudioStream" uid="uid://dpahvsi4rra6n" path="res://sounds/smoke.wav" id="3_mik06"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jav1c"]
+height = 0.238265
+radius = 0.0614907
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pw0e2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:visible")
+properties/2/spawn = true
+properties/2/sync = true
+
+[node name="SmokeGrenade" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 5
+mass = 4.2
+script = ExtResource("1_c8krn")
+
+[node name="smoke_grenade" parent="." instance=ExtResource("1_tq2xg")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00329512, -0.00495328, 0.00349771)
+shape = SubResource("CylinderShape3D_jav1c")
+
+[node name="ExplodeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pw0e2")
+
+[node name="SmokeAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_mik06")
+
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]
+[connection signal="finished" from="SmokeAudioStreamPlayer3D" to="." method="_on_smoke_audio_stream_player_3d_finished"]

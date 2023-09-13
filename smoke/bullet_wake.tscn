@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpy4clcyqrvdc"]
+
+[ext_resource type="Script" path="res://smoke/bullet_wake.gd" id="1_jbcvx"]
+[ext_resource type="Script" path="res://smoke/inverse_smoke.gd" id="2_xvo1t"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_gws8g"]
+density = -8.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_j6j67"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="bullet_wake" type="Node3D"]
+script = ExtResource("1_jbcvx")
+
+[node name="BulletWakeVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.5, 0.5, 0.5)
+shape = 2
+material = SubResource("FogMaterial_gws8g")
+script = ExtResource("2_xvo1t")
+smoke_density = -100.0
+spawn_time = 0.0
+sustain_time = 1.0
+fade_time = 3.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_j6j67")

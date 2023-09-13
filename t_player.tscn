@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://cv1204xqpcy84"]
+
+[ext_resource type="Script" path="res://t_player.gd" id="1_0srre"]
+[ext_resource type="PackedScene" uid="uid://nik36u375a0f" path="res://t_model.tscn" id="2_lb0sb"]
+[ext_resource type="Texture2D" uid="uid://csu7jul7l2025" path="res://addons/kenney_particle_pack/star_06.png" id="3_uoh5u"]
+[ext_resource type="AudioStream" uid="uid://bgm5o0t7fd8mn" path="res://sounds/ak47/ak47-1.wav" id="4_fmj4d"]
+[ext_resource type="AudioStream" uid="uid://cwxuja335coqe" path="res://sounds/reload.wav" id="5_rt5aw"]
+[ext_resource type="AudioStream" uid="uid://ebw6yg44y351" path="res://sounds/grenade_out.wav" id="6_wtdqy"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aypfv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Camera3D/t_model/MuzzleFlash:emitting")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("GrenadeTossPos:rotation")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath(".:visible")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath("CollisionShape3D:disabled")
+properties/5/spawn = true
+properties/5/sync = true
+properties/6/path = NodePath("FireAudioStreamPlayer3D:stream")
+properties/6/spawn = true
+properties/6/sync = true
+
+[sub_resource type="Gradient" id="Gradient_t2xwk"]
+offsets = PackedFloat32Array(0, 0.207547, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e7s6n"]
+gradient = SubResource("Gradient_t2xwk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qy3ds"]
+gravity = Vector3(0, 0, 0)
+angle_min = 45.0
+angle_max = 45.0
+color_ramp = SubResource("GradientTexture1D_e7s6n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxerw"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.498039, 0.109804, 1)
+albedo_texture = ExtResource("3_uoh5u")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_jum73"]
+material = SubResource("StandardMaterial3D_bxerw")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_552fk"]
+size = Vector3(0.829009, 2.192, 0.968253)
+
+[node name="t_player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_0srre")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_aypfv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.6077e-08)
+
+[node name="t_model" parent="Camera3D" instance=ExtResource("2_lb0sb")]
+transform = Transform3D(-0.029673, 0, 0.00441719, 0, 0.03, 0, -0.00441719, 0, -0.029673, 0, -2, 0.355948)
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="Camera3D/t_model"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, -3.60154, 61.6921, 44.3367)
+emitting = false
+amount = 1
+lifetime = 0.01
+one_shot = true
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_qy3ds")
+draw_pass_1 = SubResource("QuadMesh_jum73")
+
+[node name="GrenadeTossPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72529e-09, -1.19209e-07, -2.98023e-08)
+
+[node name="RayCast3D" type="RayCast3D" parent="GrenadeTossPos"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 3
+debug_shape_custom_color = Color(0, 0.952941, 0, 1)
+debug_shape_thickness = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035025, -0.897963, 0.116652)
+shape = SubResource("BoxShape3D_552fk")
+
+[node name="FireAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_fmj4d")
+volume_db = -80.0
+max_db = -2.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.55
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="ReloadAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_rt5aw")
+
+[node name="YeetAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_wtdqy")

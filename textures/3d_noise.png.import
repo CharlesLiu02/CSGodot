@@ -1,0 +1,26 @@
+[remap]
+
+importer="3d_texture"
+type="CompressedTexture3D"
+uid="uid://dgjdbd733cd3c"
+path="res://.godot/imported/3d_noise.png-6117adcd2344fdfa1b0374f80d89d8c0.ctex3d"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://textures/3d_noise.png"
+dest_files=["res://.godot/imported/3d_noise.png-6117adcd2344fdfa1b0374f80d89d8c0.ctex3d"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=8
+slices/vertical=8

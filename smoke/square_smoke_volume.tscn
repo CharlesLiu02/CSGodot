@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://smupfiuolfcf"]
+
+[ext_resource type="Script" path="res://smoke/VolumeFogGenerator.gd" id="1_ayhxg"]
+[ext_resource type="Shader" path="res://smoke/square_smoke_volume.gdshader" id="1_ea4da"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7x2g1"]
+shader = ExtResource("1_ea4da")
+shader_parameter/density = 1.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/height_falloff = 0.0
+shader_parameter/edge_fade = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2ylm"]
+
+[node name="square_smoke_volume" type="Node3D"]
+script = ExtResource("1_ayhxg")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_7x2g1")
+
+[node name="Area3D" type="Area3D" parent="FogVolume"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FogVolume/Area3D"]
+shape = SubResource("BoxShape3D_j2ylm")
